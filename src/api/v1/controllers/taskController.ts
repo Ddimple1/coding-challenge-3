@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
-
-export const createItem = (req: Request, res: Response) => {
-    // Logic to create a new item
-    
-    res.status(201).send("Create a new item");
-};
+import { Task } from "../models/taskModel";
+import { successResponse } from "../models/responseModel";
+ 
+export const CreateTask = async (req: Request, res: Response) => {
+    try {
+        const tasks: Task[] = await taskService.createTask
+        res.status(200).json(successResponse(tasks));
+    } catch (error: unknown) {
+        next(error);
+    }
